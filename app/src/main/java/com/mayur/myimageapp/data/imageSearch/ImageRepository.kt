@@ -7,7 +7,7 @@ import com.mayur.myimageapp.data.apiCall
 
 class ImageRepository {
 
-    suspend fun getSearchedImages(str: String): AsyncResult<SearchResults> {
-        return apiCall { AppApi.imageService.getImagesForSearch(str) }
+    suspend fun getSearchedImages(searchText: String, page: Int): AsyncResult<SearchResults> {
+        return apiCall { AppApi.imageService.getImagesForSearch(searchText, page) }
     }
 }

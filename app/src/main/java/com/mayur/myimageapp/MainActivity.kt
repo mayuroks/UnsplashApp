@@ -13,18 +13,25 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.mayur.myimageapp.data.SearchResultItem
-import com.mayur.myimageapp.data.SearchResults
 import com.mayur.myimageapp.ui.theme.MyImageAppTheme
 import com.skydoves.landscapist.glide.GlideImage
 
+// TODO: search bar with button
+// paginated results
+// grid shimmerView for loading
+// FullScreen fragment (need navigation??) with image transition
+// error page for no internet or results
+// change primary colors
+// test cases
+
 class MainActivity : ComponentActivity() {
-    private val viewModel by viewModels<ImageViewModel> { ImageViewModel.Factory() }
+    private val viewModel by viewModels<ImageSearchViewModel> { ImageSearchViewModel.Factory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,23 +44,18 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ImageGridUI(viewModel: ImageViewModel) {
-    val imagesResponse by viewModel.imagesResponse
-
-    LaunchedEffect(Unit) {
-        viewModel.getImages("iphone")
-    }
-
-    ImagesGridViewUI(imagesResponse = imagesResponse)
+fun ImageGridUI(viewModel: ImageSearchViewModel) {
+    val searchResults = viewModel.searchResults.collectAsLazyPagingItems()
+    ImagesGridViewUI(searchResults = searchResults)
 }
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ImagesGridViewUI(imagesResponse: SearchResults?) {
-    imagesResponse?.results?.let { images ->
+fun ImagesGridViewUI(searchResults: LazyPagingItems<SearchResultItem>?) {
+    searchResults?.let { images ->
         LazyVerticalGrid(cells = GridCells.Adaptive(100.dp)) {
-            items(images) { image ->
+            items(images.itemSnapshotList.items) { image ->
                 ImageItemUI(image)
             }
         }
@@ -71,7 +73,7 @@ fun ImageItemUI(image: SearchResultItem) {
         shape = RoundedCornerShape(0.dp),
     ) {
         GlideImage(
-            imageModel = image.urls.small
+            imageModel = image.urls.thumb
         )
     }
 }

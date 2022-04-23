@@ -12,7 +12,8 @@ interface ImageService {
     @GET("search/photos/?client_id=9EMApcZtXbD3nZ-WEGtxjp_Ukd3FOitHNIpiDe_vWjk")
     suspend fun getImagesForSearch(
         @Query("query") query: String,
-        @Query("page") page: Int = 1
+        @Query("page") page: Int = 1,
+        @Query("per_page") perPage: Int = 30
     ): Response<SearchResults>
 
 }
