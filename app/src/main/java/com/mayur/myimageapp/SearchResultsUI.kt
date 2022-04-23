@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -33,9 +34,18 @@ fun ImagesGridUI(viewModel: ImageSearchViewModel) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ImagesGridUI(searchResults: List<SearchResultItem>?) {
-    searchResults?.let { images ->
-        LazyVerticalGrid(cells = GridCells.Adaptive(100.dp)) {
-            items(images) { image ->
+    val listState = rememberLazyListState()
+
+    if (searchResults.isNullOrEmpty().not()) {
+        LaunchedEffect(key1 = searchResults?.getOrNull(0)?.id) {
+            listState.scrollToItem(0)
+        }
+
+        LazyVerticalGrid(
+            state = listState ,
+            cells = GridCells.Adaptive(100.dp)
+        ) {
+            items(searchResults!!) { image ->
                 ImageItemUI(image)
             }
         }
