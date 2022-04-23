@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.palette.graphics.Palette
 import com.mayur.myimageapp.data.SearchResults
 import com.mayur.myimageapp.data.imageSearch.ImageRepository
 import kotlinx.coroutines.launch
@@ -12,6 +13,7 @@ class ImageSearchViewModel: ViewModel() {
     private val imageRepository by lazy { ImageRepository() }
     val searchResults = mutableStateOf<SearchResults?>(null)
     val searchText = mutableStateOf("")
+    var palette = mutableStateOf<Palette?>(null)
 
 //    val imageSearchPagingSource = ImageSearchPagingSource(imageRepository, searchText.value)
 //    val pagingConfig = PagingConfig(pageSize = 50)
