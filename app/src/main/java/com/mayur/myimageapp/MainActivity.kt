@@ -30,7 +30,10 @@ class MainActivity : ComponentActivity() {
                     button = {
                         SearchButton(
                             text = "Search",
-                            onSearchClicked = { viewModel.getSearchedImages() }
+                            onSearchClicked = {
+                                viewModel.getSearchedImages()
+                                dismissKeyboard()
+                            }
                         )
                     },
                 )
@@ -39,6 +42,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
