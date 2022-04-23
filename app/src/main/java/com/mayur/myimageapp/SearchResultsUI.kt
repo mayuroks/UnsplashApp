@@ -28,7 +28,7 @@ fun ImagesGridUI(viewModel: ImageSearchViewModel) {
         viewModel.getSearchedImages()
     }
 
-    ImagesGridUI(searchResults = searchResults)
+    ImagesGridUI(searchResults = searchResults?.results)
 }
 
 @OptIn(ExperimentalFoundationApi::class)

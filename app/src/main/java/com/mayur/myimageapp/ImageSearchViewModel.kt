@@ -4,14 +4,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.mayur.myimageapp.data.SearchResultItem
+import com.mayur.myimageapp.data.SearchResults
 import com.mayur.myimageapp.data.imageSearch.ImageRepository
 import kotlinx.coroutines.launch
 
 class ImageSearchViewModel: ViewModel() {
     private val imageRepository by lazy { ImageRepository() }
+    val searchResults = mutableStateOf<SearchResults?>(null)
     val searchText = mutableStateOf("")
-    val searchResults = mutableStateOf<List<SearchResultItem>>(emptyList())
 
 //    val imageSearchPagingSource = ImageSearchPagingSource(imageRepository, searchText.value)
 //    val pagingConfig = PagingConfig(pageSize = 50)
@@ -27,7 +27,7 @@ class ImageSearchViewModel: ViewModel() {
 
             when {
                 response.isSuccess() -> {
-                    response.result?.results?.let { searchResults.value = it }
+                    response.result?.let { searchResults.value = it }
                 }
                 response.isError() -> {
                     // TODO

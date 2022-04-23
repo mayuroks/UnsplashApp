@@ -29,7 +29,7 @@ fun ImagesSearchUI(
             textAlign = TextAlign.Center
         )
         SearchBarUI(
-            modifier = Modifier.padding(top = 30.dp, bottom = 12.dp, start = 12.dp, end = 12.dp),
+            modifier = Modifier.padding(top = 30.dp, bottom = 12.dp, start = 24.dp, end = 12.dp),
             viewModel = viewModel,
             button = {
                 SearchButton(
