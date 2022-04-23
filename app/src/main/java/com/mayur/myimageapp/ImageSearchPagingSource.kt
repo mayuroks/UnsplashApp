@@ -12,10 +12,12 @@ class ImageSearchPagingSource(
 ) : PagingSource<Int, SearchResultItem>() {
 
     override fun getRefreshKey(state: PagingState<Int, SearchResultItem>): Int? {
-        return state.anchorPosition
+        // TODO fix infinite scrolling
+        return null
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchResultItem> {
+        Log.i(TAG, "Loading load(params called")
         return try {
             if (searchText.isNullOrBlank())
                 return LoadResult.Error(Throwable("Failed to get next page"))
@@ -36,6 +38,6 @@ class ImageSearchPagingSource(
     }
 
     companion object {
-        const val TAG = "SearchPagingSource"
+        const val TAG = "ImageSearchPagingSource"
     }
 }

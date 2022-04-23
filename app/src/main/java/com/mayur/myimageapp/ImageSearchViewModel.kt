@@ -1,6 +1,6 @@
 package com.mayur.myimageapp
 
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -11,7 +11,7 @@ import com.mayur.myimageapp.data.imageSearch.ImageRepository
 
 class ImageSearchViewModel: ViewModel() {
     private val imageRepository by lazy { ImageRepository() }
-    val searchText = MutableLiveData("apple pie")
+    val searchText = mutableStateOf("apple pie")
 
     var searchResults = Pager(PagingConfig(pageSize = 50)) {
         ImageSearchPagingSource(imageRepository, searchText.value)
