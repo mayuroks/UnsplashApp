@@ -46,6 +46,22 @@ fun ImagesSearchUI(
                 .fillMaxWidth()
                 .background(colorState)
         ) {
+            val colorState by animateColorAsState(
+                targetValue = if (palette != null) {
+                    when {
+                        palette!!.lightVibrantSwatch?.rgb != null -> Color(palette!!.lightVibrantSwatch!!.bodyTextColor)
+                        palette!!.lightVibrantSwatch?.rgb != null -> Color(palette!!.lightVibrantSwatch!!.titleTextColor)
+                        palette!!.lightMutedSwatch?.rgb != null -> Color(palette!!.lightMutedSwatch!!.bodyTextColor)
+                        else -> Color.Black
+                    }
+                }
+                else Color.Black,
+                animationSpec = tween(
+                    durationMillis = 700,
+                    easing = LinearEasing
+                )
+            )
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -54,7 +70,8 @@ fun ImagesSearchUI(
                 text = "UnSplash",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = colorState
             )
             SearchBarUI(
                 modifier = Modifier.padding(
