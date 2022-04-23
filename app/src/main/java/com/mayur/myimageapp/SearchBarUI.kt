@@ -18,13 +18,14 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SearchBarUI(
+    modifier: Modifier = Modifier,
     viewModel: ImageSearchViewModel,
     button: @Composable () -> Unit,
 ) {
     var searchText by viewModel.searchText
 
     Card(
-        modifier = Modifier.padding(top = 80.dp, bottom = 24.dp, start = 12.dp, end = 12.dp),
+        modifier = modifier,
         shape = RoundedCornerShape(100.dp),
         elevation = 8.dp
     ) {

@@ -3,10 +3,7 @@ package com.mayur.myimageapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mayur.myimageapp.ui.theme.MyImageAppTheme
 
@@ -24,26 +21,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentWithAppTheme  {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                SearchBarUI(
-                    viewModel = viewModel,
-                    button = {
-                        SearchButton(
-                            text = "Search",
-                            onSearchClicked = {
-                                viewModel.getSearchedImages()
-                                dismissKeyboard()
-                            }
-                        )
-                    },
-                )
-                ImagesGridUI(viewModel = viewModel)
-            }
+            ImagesSearchUI(
+                viewModel = viewModel,
+                onSearchClicked = onSearchClicked
+            )
         }
     }
+
+    private val onSearchClicked = fun() {
+        viewModel.getSearchedImages()
+        dismissKeyboard()
+    }
 }
-
-
 
 @Preview(showBackground = true)
 @Composable

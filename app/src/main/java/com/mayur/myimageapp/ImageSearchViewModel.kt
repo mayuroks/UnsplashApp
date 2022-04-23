@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class ImageSearchViewModel: ViewModel() {
     private val imageRepository by lazy { ImageRepository() }
-    val searchText = mutableStateOf("apple pie")
+    val searchText = mutableStateOf("")
     val searchResults = mutableStateOf<List<SearchResultItem>>(emptyList())
 
 //    val imageSearchPagingSource = ImageSearchPagingSource(imageRepository, searchText.value)
@@ -20,6 +20,8 @@ class ImageSearchViewModel: ViewModel() {
 //    }.flow.cachedIn(viewModelScope)
 
     fun getSearchedImages() {
+        if (searchText.value.isBlank()) return
+
         viewModelScope?.launch {
             val response = imageRepository.getSearchedImages(searchText = searchText.value, page = 1)
 
