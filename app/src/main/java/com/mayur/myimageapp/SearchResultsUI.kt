@@ -10,10 +10,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.mayur.myimageapp.data.SearchResultItem
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -21,16 +21,21 @@ import com.skydoves.landscapist.glide.GlideImage
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ImagesGridUI(viewModel: ImageSearchViewModel) {
-    val searchResults = viewModel.searchResults.collectAsLazyPagingItems()
+    val searchResults by viewModel.searchResults
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getSearchedImages()
+    }
+
     ImagesGridUI(searchResults = searchResults)
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ImagesGridUI(searchResults: LazyPagingItems<SearchResultItem>?) {
+fun ImagesGridUI(searchResults: List<SearchResultItem>?) {
     searchResults?.let { images ->
         LazyVerticalGrid(cells = GridCells.Adaptive(100.dp)) {
-            items(images.itemSnapshotList.items) { image ->
+            items(images) { image ->
                 ImageItemUI(image)
             }
         }
