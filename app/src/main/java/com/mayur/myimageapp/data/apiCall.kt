@@ -1,8 +1,6 @@
 package com.mayur.myimageapp.data
 
 import android.util.Log
-import com.mayur.myimageapp.AsyncResult
-import com.mayur.myimageapp.ResultState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response

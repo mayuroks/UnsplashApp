@@ -1,4 +1,4 @@
-package com.mayur.myimageapp
+package com.mayur.myimageapp.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mayur.myimageapp.R
 import com.skydoves.landscapist.glide.GlideImage
 
 

@@ -1,6 +1,5 @@
 package com.mayur.myimageapp.data.imageSearch
 
-import com.mayur.myimageapp.data.SearchResults
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

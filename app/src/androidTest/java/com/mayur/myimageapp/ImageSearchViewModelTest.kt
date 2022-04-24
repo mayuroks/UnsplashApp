@@ -2,7 +2,9 @@ package com.mayur.myimageapp
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.mayur.myimageapp.data.SearchResults
+import com.mayur.myimageapp.data.AsyncResult
+import com.mayur.myimageapp.data.ResultState
+import com.mayur.myimageapp.data.imageSearch.SearchResults
 import com.mayur.myimageapp.data.retrofitGson
 import com.mayur.myimageapp.imageSearch.ImageSearchViewModel
 import kotlinx.coroutines.runBlocking

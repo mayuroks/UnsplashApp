@@ -1,4 +1,4 @@
-package com.mayur.myimageapp
+package com.mayur.myimageapp.data
 
 data class AsyncResult<T>(
     val resultState: ResultState = ResultState.NOT_STARTED,

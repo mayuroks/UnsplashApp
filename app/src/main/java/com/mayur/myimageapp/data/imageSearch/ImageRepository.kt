@@ -1,8 +1,7 @@
 package com.mayur.myimageapp.data.imageSearch
 
-import com.mayur.myimageapp.AsyncResult
 import com.mayur.myimageapp.data.AppApi
-import com.mayur.myimageapp.data.SearchResults
+import com.mayur.myimageapp.data.AsyncResult
 import com.mayur.myimageapp.data.apiCall
 
 class ImageRepository : IImageRepository {

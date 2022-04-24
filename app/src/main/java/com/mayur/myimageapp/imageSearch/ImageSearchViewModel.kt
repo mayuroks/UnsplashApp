@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
-import com.mayur.myimageapp.data.SearchResults
 import com.mayur.myimageapp.data.imageSearch.IImageRepository
 import com.mayur.myimageapp.data.imageSearch.ImageRepository
+import com.mayur.myimageapp.data.imageSearch.SearchResults
 import kotlinx.coroutines.launch
 
 class ImageSearchViewModel(

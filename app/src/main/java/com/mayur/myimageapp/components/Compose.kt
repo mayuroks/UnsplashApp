@@ -1,4 +1,4 @@
-package com.mayur.myimageapp
+package com.mayur.myimageapp.components
 
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent

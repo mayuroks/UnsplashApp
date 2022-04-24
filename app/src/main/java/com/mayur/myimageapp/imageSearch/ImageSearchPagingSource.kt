@@ -3,8 +3,8 @@ package com.mayur.myimageapp.imageSearch
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.mayur.myimageapp.data.SearchResultItem
 import com.mayur.myimageapp.data.imageSearch.ImageRepository
+import com.mayur.myimageapp.data.imageSearch.SearchResultItem
 
 class ImageSearchPagingSource(
     private val imageRepository: ImageRepository,

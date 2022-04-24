@@ -1,7 +1,8 @@
 package com.mayur.myimageapp
 
-import com.mayur.myimageapp.data.SearchResults
+import com.mayur.myimageapp.data.AsyncResult
 import com.mayur.myimageapp.data.imageSearch.IImageRepository
+import com.mayur.myimageapp.data.imageSearch.SearchResults
 
 class FakeImageRepository: IImageRepository {
 

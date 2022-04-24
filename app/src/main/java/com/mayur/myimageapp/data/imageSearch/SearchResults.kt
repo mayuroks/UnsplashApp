@@ -1,4 +1,4 @@
-package com.mayur.myimageapp.data
+package com.mayur.myimageapp.data.imageSearch
 
 import com.google.gson.annotations.SerializedName
 
