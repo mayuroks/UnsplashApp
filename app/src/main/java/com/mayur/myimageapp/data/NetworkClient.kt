@@ -1,5 +1,6 @@
 package com.mayur.myimageapp.data
 
+import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -28,6 +29,10 @@ val retrofit: Retrofit by lazy {
         .baseUrl(API_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+}
+
+val retrofitGson: Gson by lazy {
+    Gson()
 }
 
 inline fun <reified T> create(): T {

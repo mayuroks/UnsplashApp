@@ -2,10 +2,11 @@ package com.mayur.myimageapp
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.mayur.myimageapp.data.SearchResults
+import com.mayur.myimageapp.data.retrofitGson
 import com.mayur.myimageapp.imageSearch.ImageSearchViewModel
 import kotlinx.coroutines.runBlocking
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.nullValue
+import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -58,4 +59,18 @@ class ImageSearchViewModelTest {
         assertThat(imageSearchViewModel.showErrorUi.getOrAwaitValue(), `is`(true))
     }
 
+    @Test
+    fun on_api_success_dont_show_error_ui() = runBlocking {
+        val jsonFileString = FileReader.readStringFromFile("search_success_response.json")
+        val response = retrofitGson.fromJson(jsonFileString, SearchResults::class.java)
+        fakeImageRepository.setResponse(AsyncResult(ResultState.SUCCESS, result = response))
+
+        imageSearchViewModel.getSearchedImages()
+
+        assertThat(imageSearchViewModel.showErrorUi.getOrAwaitValue(), `is`(false))
+//        assertThat(imageSearchViewModel.palette.value, `is`(notNullValue()))
+
+        // not a test
+        assertThat(imageSearchViewModel.searchResults.value?.results?.size, not(0))
+    }
 }
