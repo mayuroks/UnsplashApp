@@ -1,6 +1,7 @@
 package com.mayur.myimageapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.size
@@ -14,10 +15,10 @@ import com.skydoves.landscapist.palette.BitmapPalette
 
 // TODO:
 // error page for no internet or results
-// change primary colors
 // test cases
-// FullScreen fragment (need navigation??) with image transition
-// refactor and restructure code
+// Navigation setup with bottom sheet + fragment + deeplink + params
+// change primary colors
+// refactor and restructure code - datalayer module, compose previews + ui code
 // - calculate palette in viewModel instead of compose
 
 class MainActivity : ComponentActivity() {
@@ -40,7 +41,8 @@ class MainActivity : ComponentActivity() {
 
             ImagesSearchUI(
                 viewModel = viewModel,
-                onSearchClicked = onSearchClicked
+                onSearchClicked = onSearchClicked,
+                showErrorToast = showErrorToast
             )
         }
     }
@@ -48,6 +50,9 @@ class MainActivity : ComponentActivity() {
     private val onSearchClicked = fun() {
         viewModel.getSearchedImages()
         dismissKeyboard()
+    }
+    private val showErrorToast = fun() {
+        Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
     }
 
 

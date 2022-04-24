@@ -13,6 +13,7 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mayur.myimageapp.data.SearchResultItem
@@ -21,14 +22,26 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ImagesGridUI(viewModel: ImageSearchViewModel) {
+fun ImagesGridUI(
+    viewModel: ImageSearchViewModel,
+    showErrorToast: () -> Unit,
+) {
     val searchResults by viewModel.searchResults
+    val showErrorToast by viewModel.showErrorToast.observeAsState()
+    val showErrorUi by viewModel.showErrorUi.observeAsState()
 
     LaunchedEffect(key1 = Unit) {
         viewModel.getSearchedImages()
     }
 
-    ImagesGridUI(searchResults = searchResults?.results)
+    if (showErrorToast == true) {
+        showErrorToast()
+    }
+
+    if (showErrorUi == true)
+        ErrorUI("Oops!", "Something went wrong")
+    else
+        ImagesGridUI(searchResults = searchResults?.results)
 }
 
 @OptIn(ExperimentalFoundationApi::class)

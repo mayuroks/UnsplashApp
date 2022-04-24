@@ -21,7 +21,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ImagesSearchUI(
     viewModel: ImageSearchViewModel,
-    onSearchClicked: () -> Unit
+    onSearchClicked: () -> Unit,
+    showErrorToast: () -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         val palette by viewModel.palette
@@ -90,18 +91,6 @@ fun ImagesSearchUI(
             )
         }
 
-        // TODO enable once pagination is ready
-//        if (viewModel.searchResults.value?.size > 0) {
-//            Text(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(12.dp)
-//                    .alpha(0.6f),
-//                text = "${viewModel.searchResults} images found",
-//                fontSize = 14.sp,
-//            )
-//        }
-
-        ImagesGridUI(viewModel = viewModel)
+        ImagesGridUI(viewModel = viewModel, showErrorToast = showErrorToast)
     }
 }

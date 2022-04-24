@@ -1,6 +1,7 @@
 package com.mayur.myimageapp
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -11,53 +12,50 @@ import kotlinx.coroutines.launch
 
 class ImageSearchViewModel: ViewModel() {
     private val imageRepository by lazy { ImageRepository() }
-    val searchResults = mutableStateOf<SearchResults?>(null)
-    val searchText = mutableStateOf("")
     var palette = mutableStateOf<Palette?>(null)
-
-//    val imageSearchPagingSource = ImageSearchPagingSource(imageRepository, searchText.value)
-//    val pagingConfig = PagingConfig(pageSize = 50)
-//    var searchResults = Pager(pagingConfig) {
-//        imageSearchPagingSource
-//    }.flow.cachedIn(viewModelScope)
+    val searchText = mutableStateOf("")
+    val searchResults = mutableStateOf<SearchResults?>(null)
+    val searchError = mutableStateOf<Throwable?>(null)
+    val showErrorUi = MutableLiveData(false)
+    val showErrorToast = MutableLiveData(false)
 
     fun getSearchedImages() {
         if (searchText.value.isBlank()) return
 
         viewModelScope?.launch {
+            resetErrorData()
+
             val response = imageRepository.getSearchedImages(searchText = searchText.value, page = 1)
 
             when {
                 response.isSuccess() -> {
-                    response.result?.let { searchResults.value = it }
+                    response.result?.let {
+                        searchResults.value = it
+                        searchError.value = null
+                    }
                 }
                 response.isError() -> {
-                    // TODO
+                    searchError.value = response.error
+                    if (searchResults.value == null) {
+                        // show Error screen
+                        showErrorUi.value = true
+                    } else {
+                        // show toast message
+                        showErrorToast.value = false
+                    }
+
                 }
                 response.inProgress() -> {
                     // TODO
                 }
             }
-
-
-//            TODO non-feasible code
-//            val result = imageSearchPagingSource.load(
-//                PagingSource.LoadParams.Refresh(
-//                    1,
-//                    50,
-//                    false,
-//                )
-//            )
-//
-//            when(result) {
-//                is PagingSource.LoadResult.Page -> {
-//                    result.data
-//                }
-//                is PagingSource.LoadResult.Error -> TODO()
-//                is PagingSource.LoadResult.Invalid -> TODO()
-//                is PagingSource.LoadResult.Page -> TODO()
-//            }
         }
+    }
+
+    private fun resetErrorData() {
+        searchError.value = null
+        showErrorUi.value = false
+        showErrorToast.value = false
     }
 
 

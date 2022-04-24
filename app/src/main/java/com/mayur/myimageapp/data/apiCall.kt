@@ -1,5 +1,6 @@
 package com.mayur.myimageapp.data
 
+import android.util.Log
 import com.mayur.myimageapp.AsyncResult
 import com.mayur.myimageapp.ResultState
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +34,7 @@ fun <T> processResponse(result: AsyncResult<T>, response: Response<T>): AsyncRes
 
         } ?: run {
             if (response.code() == 200) {
-                // empty body
+                Log.i(TAG, "response code is 200 but body is null")
             }
 
             return result.error(SERVER_ERROR_MSG, ResultState.ERROR)
@@ -43,6 +44,7 @@ fun <T> processResponse(result: AsyncResult<T>, response: Response<T>): AsyncRes
     return result
 }
 fun <T> processError(result: AsyncResult<T>, t: Throwable): AsyncResult<T> {
+    Log.i(TAG, t.message.toString())
     t.printStackTrace()
     return result.error(t.message ?: GENERIC_ERROR_MSG, ResultState.ERROR)
 }
