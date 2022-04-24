@@ -16,12 +16,6 @@ import com.mayur.myimageapp.ui.theme.MyImageAppTheme
 import com.skydoves.landscapist.glide.GlideImage
 import com.skydoves.landscapist.palette.BitmapPalette
 
-// TODO:
-// test cases
-// Navigation setup with bottom sheet + fragment + deeplink + params
-// change primary colors
-// refactor and restructure code - datalayer module, compose previews + ui code
-// - calculate palette in viewModel instead of compose
 
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<ImageSearchViewModel> {
