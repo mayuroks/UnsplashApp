@@ -3,6 +3,7 @@ package com.mayur.myimageapp
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.mayur.myimageapp.imageSearch.ImageSearchViewModel
+import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
@@ -14,13 +15,13 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ImageSearchViewModelTest {
 
-    private lateinit var imageRepository: FakeImageRepository
+    private lateinit var fakeImageRepository: FakeImageRepository
     private lateinit var imageSearchViewModel: ImageSearchViewModel
 
     @Before
     fun setup() {
-        imageRepository = FakeRepoProvider.fakeImageRepository
-        imageSearchViewModel = ImageSearchViewModel(imageRepository)
+        fakeImageRepository = FakeRepoProvider.fakeImageRepository
+        imageSearchViewModel = ImageSearchViewModel(fakeImageRepository)
     }
 
     @get:Rule
@@ -45,4 +46,16 @@ class ImageSearchViewModelTest {
         assertThat(imageSearchViewModel.showErrorUi.getOrAwaitValue(), `is`(false))
         assertThat(imageSearchViewModel.showErrorToast.getOrAwaitValue(), `is`(false))
     }
+
+    @Test
+    fun on_api_error_show_error_ui_if_search_results_are_null() = runBlocking {
+        imageSearchViewModel.searchResults.value = null
+        imageSearchViewModel.searchText.value = "Test"
+        fakeImageRepository.setResponse(AsyncResult(ResultState.ERROR))
+
+        imageSearchViewModel.getSearchedImages()
+
+        assertThat(imageSearchViewModel.showErrorUi.getOrAwaitValue(), `is`(true))
+    }
+
 }
