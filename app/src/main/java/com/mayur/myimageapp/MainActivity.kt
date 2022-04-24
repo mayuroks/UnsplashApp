@@ -12,13 +12,13 @@ import com.mayur.myimageapp.ui.theme.MyImageAppTheme
 import com.skydoves.landscapist.glide.GlideImage
 import com.skydoves.landscapist.palette.BitmapPalette
 
-// TODO: search bar with button
-// paginated results
-// grid shimmerView for loading
-// FullScreen fragment (need navigation??) with image transition
+// TODO:
 // error page for no internet or results
 // change primary colors
 // test cases
+// FullScreen fragment (need navigation??) with image transition
+// refactor and restructure code
+// - calculate palette in viewModel instead of compose
 
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<ImageSearchViewModel> { ImageSearchViewModel.Factory() }
@@ -49,6 +49,22 @@ class MainActivity : ComponentActivity() {
         viewModel.getSearchedImages()
         dismissKeyboard()
     }
+
+
+    // TODO test getPaletteFromImageUrl and refactor this at the end
+//    private fun setupObservers() {
+//        viewModel.searchResults.observe() {
+//            firstItem?.let {
+//
+//                Glide.get(
+//                    this,
+//                    it.urls.thumb,
+//                    onSuccess = { viewModel.palette.value = it },
+//                    onError = { viewModel.palette.value = null }
+//                )
+//            }
+//        }
+//    }
 }
 
 @Preview(showBackground = true)
