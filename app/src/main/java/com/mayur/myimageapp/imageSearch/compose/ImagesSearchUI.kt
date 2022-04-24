@@ -1,4 +1,4 @@
-package com.mayur.myimageapp
+package com.mayur.myimageapp.imageSearch.compose
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing
@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
@@ -17,6 +18,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mayur.myimageapp.ImagesGridUI
+import com.mayur.myimageapp.SearchBarUI
+import com.mayur.myimageapp.SearchButtonUI
 import com.mayur.myimageapp.imageSearch.ImageSearchViewModel
 
 @Composable
@@ -26,7 +30,7 @@ fun ImagesSearchUI(
     showErrorToast: () -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        val palette by viewModel.palette
+        val palette by viewModel.palette.observeAsState()
         val colorState by animateColorAsState(
             targetValue = if (palette != null) {
                 when {
