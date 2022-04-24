@@ -2,8 +2,6 @@ package com.mayur.myimageapp
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.mayur.myimageapp.data.RepoProvider
-import com.mayur.myimageapp.data.imageSearch.ImageRepository
 import com.mayur.myimageapp.imageSearch.ImageSearchViewModel
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
@@ -16,12 +14,12 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ImageSearchViewModelTest {
 
-    private lateinit var imageRepository: ImageRepository
+    private lateinit var imageRepository: FakeImageRepository
     private lateinit var imageSearchViewModel: ImageSearchViewModel
 
     @Before
     fun setup() {
-        imageRepository = RepoProvider.imageRepository
+        imageRepository = FakeRepoProvider.fakeImageRepository
         imageSearchViewModel = ImageSearchViewModel(imageRepository)
     }
 

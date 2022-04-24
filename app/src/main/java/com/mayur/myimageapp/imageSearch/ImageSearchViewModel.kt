@@ -7,11 +7,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
 import com.mayur.myimageapp.data.SearchResults
+import com.mayur.myimageapp.data.imageSearch.IImageRepository
 import com.mayur.myimageapp.data.imageSearch.ImageRepository
 import kotlinx.coroutines.launch
 
 class ImageSearchViewModel(
-    private val imageRepository: ImageRepository
+    private val imageRepository: IImageRepository
 ) : ViewModel() {
     var palette = mutableStateOf<Palette?>(null)
     val searchText = mutableStateOf("")
