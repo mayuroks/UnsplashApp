@@ -10,8 +10,9 @@ import com.mayur.myimageapp.data.SearchResults
 import com.mayur.myimageapp.data.imageSearch.ImageRepository
 import kotlinx.coroutines.launch
 
-class ImageSearchViewModel: ViewModel() {
-    private val imageRepository by lazy { ImageRepository() }
+class ImageSearchViewModel(
+    private val imageRepository: ImageRepository
+) : ViewModel() {
     var palette = mutableStateOf<Palette?>(null)
     val searchText = mutableStateOf("")
     val searchResults = mutableStateOf<SearchResults?>(null)
@@ -25,7 +26,8 @@ class ImageSearchViewModel: ViewModel() {
         viewModelScope?.launch {
             resetErrorData()
 
-            val response = imageRepository.getSearchedImages(searchText = searchText.value, page = 1)
+            val response =
+                imageRepository.getSearchedImages(searchText = searchText.value, page = 1)
 
             when {
                 response.isSuccess() -> {
@@ -52,17 +54,18 @@ class ImageSearchViewModel: ViewModel() {
         }
     }
 
-    private fun resetErrorData() {
+    fun resetErrorData() {
         searchError.value = null
         showErrorUi.value = false
         showErrorToast.value = false
     }
 
-
-    class Factory: ViewModelProvider.NewInstanceFactory() {
+    class Factory(
+        private val imageRepository: ImageRepository
+    ) : ViewModelProvider.NewInstanceFactory() {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return ImageSearchViewModel() as T
+            return ImageSearchViewModel(imageRepository) as T
         }
     }
 }
