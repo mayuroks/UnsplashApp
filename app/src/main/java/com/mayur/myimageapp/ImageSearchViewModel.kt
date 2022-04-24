@@ -41,7 +41,7 @@ class ImageSearchViewModel: ViewModel() {
                         showErrorUi.value = true
                     } else {
                         // show toast message
-                        showErrorToast.value = false
+                        showErrorToast.value = true
                     }
 
                 }

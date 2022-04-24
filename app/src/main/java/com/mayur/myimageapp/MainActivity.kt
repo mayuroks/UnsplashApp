@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
         dismissKeyboard()
     }
     private val showErrorToast = fun() {
-        Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Error in getting images", Toast.LENGTH_SHORT).show()
     }
 
 
