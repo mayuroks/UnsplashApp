@@ -1,4 +1,4 @@
-package com.mayur.myimageapp
+package com.mayur.myimageapp.imageSearch
 
 import android.util.Log
 import androidx.paging.PagingSource

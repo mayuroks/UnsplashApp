@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mayur.myimageapp.imageSearch.ImageSearchViewModel
 
 @Composable
 fun ImagesSearchUI(
@@ -83,7 +84,7 @@ fun ImagesSearchUI(
                 ),
                 viewModel = viewModel,
                 button = {
-                    SearchButton(
+                    SearchButtonUI(
                         text = "Search",
                         onSearchClicked = onSearchClicked
                     )

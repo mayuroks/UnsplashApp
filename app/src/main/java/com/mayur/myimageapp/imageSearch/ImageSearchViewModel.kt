@@ -1,4 +1,4 @@
-package com.mayur.myimageapp
+package com.mayur.myimageapp.imageSearch
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
