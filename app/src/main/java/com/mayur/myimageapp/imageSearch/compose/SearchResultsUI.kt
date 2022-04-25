@@ -1,4 +1,4 @@
-package com.mayur.myimageapp
+package com.mayur.myimageapp.imageSearch.compose
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable

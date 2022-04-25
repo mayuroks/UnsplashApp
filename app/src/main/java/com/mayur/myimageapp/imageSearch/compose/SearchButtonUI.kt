@@ -1,4 +1,4 @@
-package com.mayur.myimageapp
+package com.mayur.myimageapp.imageSearch.compose
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -6,6 +6,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -20,4 +21,10 @@ fun SearchButtonUI(
     ) {
         Text(text = text)
     }
+}
+
+@Preview
+@Composable
+fun SearchButtonUIPreview() {
+    SearchButtonUI("Search", {})
 }

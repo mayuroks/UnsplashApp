@@ -18,9 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mayur.myimageapp.ImagesGridUI
-import com.mayur.myimageapp.SearchBarUI
-import com.mayur.myimageapp.SearchButtonUI
 import com.mayur.myimageapp.imageSearch.ImageSearchViewModel
 
 @Composable

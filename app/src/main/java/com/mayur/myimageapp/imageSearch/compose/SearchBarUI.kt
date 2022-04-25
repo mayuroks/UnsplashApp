@@ -1,4 +1,4 @@
-package com.mayur.myimageapp
+package com.mayur.myimageapp.imageSearch.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,7 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mayur.myimageapp.R
 import com.mayur.myimageapp.imageSearch.ImageSearchViewModel
 
 @Composable
@@ -25,6 +27,21 @@ fun SearchBarUI(
 ) {
     var searchText by viewModel.searchText
 
+    SearchBarUI(
+        modifier = modifier,
+        searchText = searchText,
+        button = button,
+        onSearchTextChange = { searchText = it }
+    )
+}
+
+@Composable
+fun SearchBarUI(
+    modifier: Modifier = Modifier,
+    searchText: String,
+    button: @Composable () -> Unit,
+    onSearchTextChange: (String) -> Unit
+) {
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(100.dp),
@@ -44,9 +61,7 @@ fun SearchBarUI(
                         .fillMaxWidth()
                         .padding(0.dp),
                     value = searchText,
-                    onValueChange = {
-                        searchText = it
-                    },
+                    onValueChange = onSearchTextChange,
                     placeholder = { Text("Beagle, Fruits, Cars") },
                     leadingIcon = {
                         Image(
@@ -61,4 +76,16 @@ fun SearchBarUI(
             button()
         }
     }
+}
+
+@Preview
+@Composable
+fun SearchBarUIPreview() {
+    SearchBarUI(
+        searchText = "",
+        button = {
+            SearchButtonUI("Search", {})
+        },
+        onSearchTextChange = {}
+    )
 }
