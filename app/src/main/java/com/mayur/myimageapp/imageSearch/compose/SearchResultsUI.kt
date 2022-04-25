@@ -2,7 +2,6 @@ package com.mayur.myimageapp.imageSearch.compose
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -72,7 +71,6 @@ fun ImageItemUI(image: SearchResultItem) {
     Card(
         modifier = Modifier
             .size(100.dp)
-            .padding(0.5.dp)
             .clickable { },
         elevation = 6.dp,
         shape = RoundedCornerShape(0.dp),
