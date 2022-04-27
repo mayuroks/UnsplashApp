@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class ImageSearchViewModel(
     private val imageRepository: IImageRepository
 ) : ViewModel() {
-    var palette = MutableLiveData<Palette?>(null)
+    val palette = MutableLiveData<Palette?>(null)
     val searchText = mutableStateOf("")
     val searchResults = MutableLiveData<SearchResults?>(null)
     val searchError = mutableStateOf<Throwable?>(null)
@@ -24,7 +24,7 @@ class ImageSearchViewModel(
     fun getSearchedImages() {
         if (searchText.value.isBlank()) return
 
-        viewModelScope?.launch {
+        viewModelScope.launch {
             resetErrorData()
 
             val response =
