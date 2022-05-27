@@ -28,8 +28,8 @@ fun ImagesGridUI(
     showErrorToast: () -> Unit,
 ) {
     val searchResults by viewModel.searchResults.observeAsState()
-    val showErrorToast by viewModel.showErrorToast.observeAsState()
-    val showErrorUi by viewModel.showErrorUi.observeAsState()
+    val showErrorToast by viewModel.showErrorToast
+    val showErrorUi by viewModel.showErrorUi
 
     LaunchedEffect(key1 = Unit) {
         viewModel.getSearchedImages()

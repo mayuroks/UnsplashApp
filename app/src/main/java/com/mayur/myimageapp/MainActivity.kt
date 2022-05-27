@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentWithAppTheme {
-            val palette by viewModel.palette.observeAsState()
+            val palette by viewModel.palette
             val searchResultItem = viewModel.searchResults.value?.results?.randomOrNull()
 
             ImagesSearchUI(

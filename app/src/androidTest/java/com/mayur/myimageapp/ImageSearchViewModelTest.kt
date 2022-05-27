@@ -46,8 +46,8 @@ class ImageSearchViewModelTest {
 
         imageSearchViewModel.resetErrorData()
 
-        assertThat(imageSearchViewModel.showErrorUi.getOrAwaitValue(), `is`(false))
-        assertThat(imageSearchViewModel.showErrorToast.getOrAwaitValue(), `is`(false))
+        assertThat(imageSearchViewModel.showErrorUi.value, `is`(false))
+        assertThat(imageSearchViewModel.showErrorToast.value, `is`(false))
     }
 
     @Test
@@ -58,7 +58,7 @@ class ImageSearchViewModelTest {
 
         imageSearchViewModel.getSearchedImages()
 
-        assertThat(imageSearchViewModel.showErrorUi.getOrAwaitValue(), `is`(true))
+        assertThat(imageSearchViewModel.showErrorUi.value, `is`(true))
     }
 
     @Test
@@ -69,7 +69,7 @@ class ImageSearchViewModelTest {
 
         imageSearchViewModel.getSearchedImages()
 
-        assertThat(imageSearchViewModel.showErrorUi.getOrAwaitValue(), `is`(false))
+        assertThat(imageSearchViewModel.showErrorUi.value, `is`(false))
 //        assertThat(imageSearchViewModel.palette.value, `is`(notNullValue()))
 
         // not a test
