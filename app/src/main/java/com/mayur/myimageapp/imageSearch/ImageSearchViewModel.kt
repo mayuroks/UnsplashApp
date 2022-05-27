@@ -16,7 +16,7 @@ class ImageSearchViewModel(
 ) : ViewModel() {
     val palette = mutableStateOf<Palette?>(null)
     val searchText = mutableStateOf("")
-    val searchResults = MutableLiveData<SearchResults?>(null)
+    val searchResults = mutableStateOf<SearchResults?>(null)
     val searchError = mutableStateOf<Throwable?>(null)
     val showErrorUi = mutableStateOf(false)
     val showErrorToast = mutableStateOf(false)
@@ -32,22 +32,28 @@ class ImageSearchViewModel(
 
             when {
                 response.isSuccess() -> {
+                    println("response.isSuccess")
                     response.result?.let {
                         searchResults.value = it
                         searchError.value = null
                     }
                 }
+
                 response.isError() -> {
+                    println("response.isError")
                     searchError.value = response.error
                     if (searchResults.value == null) {
                         // show Error screen
                         showErrorUi.value = true
+                        println("response.isError showErrorUi.value = true")
                     } else {
                         // show toast message
                         showErrorToast.value = true
+                        println("response.isError showErrorToast.value = true")
                     }
 
                 }
+
                 response.inProgress() -> {
                     // TODO
                 }

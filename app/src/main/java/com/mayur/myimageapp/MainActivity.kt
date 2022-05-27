@@ -5,8 +5,11 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
 import com.mayur.myimageapp.components.getBgColor
 import com.mayur.myimageapp.components.getTextColor
@@ -26,14 +29,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentWithAppTheme {
-            val palette by viewModel.palette
-            val searchResultItem = viewModel.searchResults.value?.results?.randomOrNull()
-
             ImagesSearchUI(
                 viewModel = viewModel,
-                searchResultItem = searchResultItem,
-                bgColor = getBgColor(palette),
-                textColor = getTextColor(palette),
+                searchResultItem = viewModel.searchResults.value?.results?.randomOrNull(),
+                context = LocalContext.current,
                 onSearchClicked = onSearchClicked,
                 showErrorToast = showErrorToast
             )
@@ -47,27 +46,6 @@ class MainActivity : ComponentActivity() {
 
     private val showErrorToast = fun() {
         showShortToast("Error in getting images")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setupObservers()
-    }
-
-    private fun setupObservers() {
-        viewModel.searchResults.observe(this) {
-            it?.results?.randomOrNull()?.let { item ->
-                getPaletteFromImageUrl(
-                    context = this@MainActivity,
-                    imageUrl = item.urls.thumb,
-                    onSuccess = { palette ->
-                        viewModel.palette.value = palette
-                        Log.i(TAG, "viewModel.palette.value = palette")
-                    },
-                    onError = { viewModel.palette.value = null }
-                )
-            }
-        }
     }
 
     companion object {
