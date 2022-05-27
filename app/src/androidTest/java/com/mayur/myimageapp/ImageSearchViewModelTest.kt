@@ -27,6 +27,9 @@ class ImageSearchViewModelTest {
         imageSearchViewModel = ImageSearchViewModel(fakeImageRepository)
     }
 
+//    @get:Rule
+//    var coroutineRule = TestCoroutineRule()
+
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
