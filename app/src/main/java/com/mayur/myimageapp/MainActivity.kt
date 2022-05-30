@@ -1,24 +1,16 @@
 package com.mayur.myimageapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
-import com.mayur.myimageapp.components.getBgColor
-import com.mayur.myimageapp.components.getTextColor
 import com.mayur.myimageapp.components.setContentWithAppTheme
 import com.mayur.myimageapp.data.RepoProvider
 import com.mayur.myimageapp.imageSearch.ImageSearchViewModel
 import com.mayur.myimageapp.imageSearch.compose.ImagesSearchUI
 import com.mayur.myimageapp.ui.theme.MyImageAppTheme
-import com.mayur.myimageapp.utils.getPaletteFromImageUrl
 
 
 class MainActivity : ComponentActivity() {
